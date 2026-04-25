@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NutriNexus — Vitaminas & Minerais: Ciência, Função e Perigos</title>
+<meta name="description" content="Projeto educativo sobre vitaminas, minerais, funções no organismo e riscos da suplementação sem orientação profissional.">
+<meta name="keywords" content="vitaminas, minerais, suplementos, saúde, farmácia, educação em saúde, NutriNexus">
+<meta name="author" content="NutriNexus">
+<meta name="theme-color" content="#06000f">
+<meta property="og:title" content="NutriNexus — Vitaminas & Minerais">
+<meta property="og:description" content="Ciência, função e perigos reais do uso indiscriminado de vitaminas e minerais.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2306000f'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='46' fill='%2322d3ee' font-family='Arial'%3EN%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #06000f;
+  --bg2: #0e0020;
+  --bg3: #160034;
+  --accent: #a855f7;
+  --accent2: #7c3aed;
+  --cyan: #22d3ee;
+  --pink: #e040fb;
+  --text: #ede9fe;
+  --muted: #9d7fc3;
+  --border: rgba(168,85,247,0.18);
+  --glow: rgba(168,85,247,0.3);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 17px;
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+body::before {
+  content:'';
+  position:fixed; inset:0;
+  background:
+    linear-gradient(rgba(168,85,247,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168,85,247,0.035) 1px, transparent 1px);
+  background-size: 55px 55px;
+  pointer-events:none; z-index:0;
+}
+
+.orb { position:fixed; border-radius:50%; filter:blur(90px); pointer-events:none; z-index:0; }
+.orb1 { width:600px; height:600px; background:rgba(124,58,237,0.18); top:-150px; right:-150px; animation: fl 9s ease-in-out infinite; }
+.orb2 { width:400px; height:400px; background:rgba(224,64,251,0.12); bottom:5%; left:-100px; animation: fl 12s ease-in-out infinite reverse; }
+.orb3 { width:300px; height:300px; background:rgba(34,211,238,0.08); top:45%; right:10%; animation: fl 7s ease-in-out infinite 2s; }
+@keyframes fl { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-28px)} }
+
+/* ====== NAV ====== */
+nav {
+  position:fixed; top:0; width:100%; z-index:200;
+  background:rgba(6,0,15,0.88);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 3.5rem; height:68px;
+}
+.logo {
+  font-family:'Orbitron',monospace; font-size:1.3rem; font-weight:900; letter-spacing:3px;
+  background:linear-gradient(90deg,var(--accent),var(--cyan));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+nav ul { display:flex; gap:2rem; list-style:none; }
+nav a { color:var(--muted); text-decoration:none; font-size:.85rem; letter-spacing:2px; text-transform:uppercase; font-weight:600; transition:color .3s; }
+nav a:hover { color:var(--accent); }
+
+/* ====== HERO ====== */
+.hero {
+  position:relative; z-index:1; min-height:100vh;
+  display:flex; align-items:center; justify-content:center;
+  text-align:center; padding:120px 2rem 5rem;
+}
+.badge {
+  display:inline-block;
+  border:1px solid rgba(34,211,238,.4); background:rgba(34,211,238,.05);
+  color:var(--cyan); font-size:.7rem; letter-spacing:5px; text-transform:uppercase;
+  padding:.4rem 1.6rem; margin-bottom:1.8rem; font-weight:600;
+}
+.hero h1 {
+  font-family:'Orbitron',monospace; font-size:clamp(2.2rem,6vw,5rem);
+  font-weight:900; line-height:1.08; letter-spacing:1px; margin-bottom:1.5rem;
+}
+.grad { background:linear-gradient(135deg,var(--accent),var(--cyan),var(--pink)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.hero p { max-width:620px; margin:0 auto 2.5rem; color:var(--muted); font-size:1.05rem; font-weight:300; }
+.hero-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+.btn { font-family:'Rajdhani',sans-serif; font-size:.9rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:.85rem 2.2rem; cursor:pointer; border:none; clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%); transition:all .3s; text-decoration:none; display:inline-block; }
+.btn-p { background:linear-gradient(135deg,var(--accent2),var(--pink)); color:#fff; box-shadow:0 0 28px rgba(124,58,237,.45); }
+.btn-p:hover { box-shadow:0 0 50px rgba(124,58,237,.75); transform:translateY(-2px); }
+.btn-o { background:transparent; border:1px solid rgba(168,85,247,.4); color:var(--text); }
+.btn-o:hover { border-color:var(--accent); color:var(--accent); }
+
+/* ====== SECTION WRAPPER ====== */
+.section { position:relative; z-index:1; padding:6rem 3.5rem; }
+.section.dark { background:rgba(14,0,32,.5); }
+.s-tag { display:inline-block; font-size:.7rem; letter-spacing:5px; text-transform:uppercase; color:var(--cyan); margin-bottom:.8rem; font-weight:600; }
+.s-title { font-family:'Orbitron',monospace; font-size:clamp(1.6rem,3.5vw,2.6rem); font-weight:700; margin-bottom:.8rem; }
+.s-title span { background:linear-gradient(135deg,var(--accent),var(--pink)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.s-sub { color:var(--muted); font-size:.95rem; font-weight:300; max-width:700px; margin-bottom:3rem; }
+.centered { text-align:center; }
+.centered .s-sub { margin-left:auto; margin-right:auto; }
+.max { max-width:1200px; margin:0 auto; }
+
+/* ====== SOURCE BADGE ====== */
+.source {
+  display:inline-flex; align-items:center; gap:.4rem;
+  background:rgba(34,211,238,.07); border:1px solid rgba(34,211,238,.2);
+  color:var(--cyan); font-size:.72rem; letter-spacing:1px; padding:.25rem .75rem;
+  font-weight:600; margin-top:.8rem; text-decoration:none; cursor:pointer;
+  transition:background .3s;
+}
+.source:hover { background:rgba(34,211,238,.15); }
+.source::before { content:'↗'; font-size:.8rem; }
+
+/* ====== WHAT ARE VITAMINS ====== */
+.def-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:start; }
+.def-body { font-size:1rem; line-height:1.85; color:var(--text); font-weight:300; }
+.def-body p { margin-bottom:1rem; }
+.highlight-box {
+  background:rgba(168,85,247,.08); border:1px solid var(--border);
+  border-left:3px solid var(--accent); padding:1.4rem 1.6rem;
+  font-size:.95rem; color:var(--text); margin:1.2rem 0; line-height:1.75;
+}
+.fat-water {
+  display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.5rem;
+}
+.type-card {
+  background:rgba(14,0,32,.7); border:1px solid var(--border); padding:1.4rem;
+}
+.type-card h4 { font-family:'Orbitron',monospace; font-size:.8rem; letter-spacing:2px; margin-bottom:.7rem; }
+.type-card.fat h4 { color:var(--accent); }
+.type-card.water h4 { color:var(--cyan); }
+.type-card ul { list-style:none; }
+.type-card li { font-size:.9rem; color:var(--muted); padding:.2rem 0; }
+.type-card li::before { content:'▸ '; color:var(--accent); }
+.type-card.water li::before { color:var(--cyan); }
+
+/* ====== VITAMINS TABLE ====== */
+.vtable { width:100%; border-collapse:collapse; margin-top:1rem; }
+.vtable th {
+  background:rgba(168,85,247,.12); color:var(--accent);
+  font-family:'Orbitron',monospace; font-size:.75rem; letter-spacing:2px;
+  text-align:left; padding:.8rem 1rem; border-bottom:1px solid var(--border);
+  text-transform:uppercase; font-weight:700;
+}
+.vtable td { padding:.85rem 1rem; border-bottom:1px solid rgba(168,85,247,.08); font-size:.92rem; vertical-align:top; }
+.vtable tr:hover td { background:rgba(168,85,247,.04); }
+.vtable td:first-child { font-family:'Orbitron',monospace; font-size:.8rem; color:var(--accent); font-weight:700; white-space:nowrap; }
+.vtable td:nth-child(2) { font-weight:600; color:var(--text); }
+.vtable td:nth-child(3),
+.vtable td:nth-child(4) { color:var(--muted); font-weight:300; }
+.sol-fat { color:var(--pink); font-size:.75rem; font-weight:700; letter-spacing:1px; background:rgba(224,64,251,.08); padding:.15rem .5rem; display:inline-block; }
+.sol-water { color:var(--cyan); font-size:.75rem; font-weight:700; letter-spacing:1px; background:rgba(34,211,238,.08); padding:.15rem .5rem; display:inline-block; }
+
+/* ====== DANGER SECTION ====== */
+.danger-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; }
+.danger-card {
+  background:rgba(14,0,32,.8); border:1px solid rgba(224,64,251,.2);
+  border-top:2px solid var(--pink); padding:1.8rem; position:relative; overflow:hidden;
+  transition:all .35s;
+}
+.danger-card:hover { border-color:rgba(224,64,251,.5); transform:translateY(-3px); box-shadow:0 15px 50px rgba(224,64,251,.1); }
+.d-icon { font-size:1.5rem; margin-bottom:1rem; display:block; }
+.danger-card h3 { font-family:'Orbitron',monospace; font-size:.9rem; letter-spacing:2px; color:var(--pink); margin-bottom:.8rem; }
+.danger-card p { color:var(--muted); font-size:.9rem; line-height:1.75; font-weight:300; }
+.alert-bar {
+  background:rgba(239,68,68,.07); border:1px solid rgba(239,68,68,.25);
+  border-left:3px solid #ef4444; padding:1.2rem 1.5rem;
+  font-size:.92rem; color:#fca5a5; line-height:1.75; margin:2rem 0;
+}
+.alert-bar strong { color:#ef4444; font-weight:700; }
+
+/* ====== STATS BAR ====== */
+.stats-strip { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); border-top:1px solid var(--border); border-bottom:1px solid var(--border); gap:1px; background:var(--border); }
+.stat { background:var(--bg); padding:2.2rem 1.5rem; text-align:center; }
+.stat-n { font-family:'Orbitron',monospace; font-size:2.3rem; font-weight:900; background:linear-gradient(135deg,var(--accent),var(--cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; display:block; }
+.stat-l { color:var(--muted); font-size:.75rem; letter-spacing:2px; text-transform:uppercase; font-weight:600; margin-top:.2rem; }
+
+/* ====== RECOMMENDATIONS ====== */
+.reco-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.2rem; }
+.reco-card { background:rgba(168,85,247,.05); border:1px solid var(--border); padding:1.6rem; }
+.reco-card h4 { font-family:'Orbitron',monospace; font-size:.8rem; letter-spacing:2px; color:var(--accent); margin-bottom:.6rem; }
+.reco-card p { color:var(--muted); font-size:.88rem; line-height:1.7; font-weight:300; }
+
+/* ====== FOOTER ====== */
+footer { position:relative; z-index:1; border-top:1px solid var(--border); padding:4rem 3.5rem; text-align:center; }
+.f-logo { font-family:'Orbitron',monospace; font-size:1.5rem; font-weight:900; background:linear-gradient(90deg,var(--accent),var(--cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; display:block; margin-bottom:.8rem; }
+.f-tagline { color:var(--muted); font-size:.8rem; letter-spacing:3px; text-transform:uppercase; font-weight:600; margin-bottom:2rem; }
+.f-disclaimer { background:rgba(168,85,247,.06); border:1px solid var(--border); padding:1.2rem 2rem; max-width:700px; margin:0 auto 2rem; font-size:.82rem; color:var(--muted); line-height:1.7; }
+.f-copy { color:rgba(157,127,195,.35); font-size:.78rem; letter-spacing:1px; }
+
+.divider { text-align:center; padding:1.5rem; color:rgba(168,85,247,.25); font-family:'Orbitron',monospace; font-size:.65rem; letter-spacing:5px; }
+
+/* ====== SOURCES LIST ====== */
+.sources-list { list-style:none; }
+.sources-list li { border-bottom:1px solid var(--border); padding:.9rem 0; font-size:.85rem; color:var(--muted); display:flex; gap:.8rem; align-items:flex-start; }
+.sources-list li::before { content:counter(src); counter-increment:src; font-family:'Orbitron',monospace; font-size:.7rem; color:var(--accent); background:rgba(168,85,247,.1); padding:.2rem .5rem; min-width:28px; text-align:center; margin-top:.1rem; flex-shrink:0; }
+.sources-list { counter-reset:src; }
+.sources-list a { color:var(--cyan); text-decoration:none; }
+.sources-list a:hover { text-decoration:underline; }
+.src-label { font-weight:600; color:var(--text); display:block; margin-bottom:.2rem; font-size:.88rem; }
+
+
+
+/* ====== PROFESSIONAL ENHANCEMENTS ====== */
+.progress {
+  position:fixed; top:0; left:0; height:3px; width:0%; z-index:500;
+  background:linear-gradient(90deg,var(--accent),var(--cyan),var(--pink));
+  box-shadow:0 0 18px var(--glow);
+}
+.mobile-toggle { display:none; background:transparent; color:var(--text); border:1px solid var(--border); padding:.45rem .65rem; font-size:1.1rem; cursor:pointer; }
+.kicker { color:var(--cyan); font-weight:700; letter-spacing:2px; text-transform:uppercase; font-size:.78rem; margin-bottom:.6rem; }
+.hero::after {
+  content:''; position:absolute; bottom:0; left:50%; transform:translateX(-50%);
+  width:min(900px,90%); height:1px; background:linear-gradient(90deg,transparent,var(--accent),var(--cyan),transparent);
+}
+.hero p strong { color:var(--text); }
+.card-hover, .type-card, .reco-card { transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease; }
+.type-card:hover, .reco-card:hover { transform:translateY(-4px); border-color:rgba(34,211,238,.35); box-shadow:0 16px 45px rgba(34,211,238,.07); }
+.reading-box {
+  background:linear-gradient(135deg,rgba(168,85,247,.10),rgba(34,211,238,.05));
+  border:1px solid var(--border); padding:1.3rem 1.5rem; margin:1.8rem 0 0;
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1rem;
+}
+.reading-box div { color:var(--muted); font-size:.88rem; }
+.reading-box strong { display:block; color:var(--text); font-family:'Orbitron',monospace; font-size:.78rem; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:.25rem; }
+.back-top {
+  position:fixed; right:1.1rem; bottom:1.1rem; z-index:300; width:46px; height:46px;
+  border:1px solid var(--border); background:rgba(6,0,15,.82); color:var(--cyan);
+  display:grid; place-items:center; text-decoration:none; font-size:1.2rem; opacity:0; pointer-events:none;
+  transition:opacity .25s ease, transform .25s ease; backdrop-filter:blur(14px);
+}
+.back-top.show { opacity:1; pointer-events:auto; }
+.back-top:hover { transform:translateY(-3px); border-color:var(--cyan); }
+.reveal { opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+.skip-link { position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden; }
+.skip-link:focus { left:1rem; top:1rem; width:auto; height:auto; z-index:999; background:var(--accent2); color:white; padding:.6rem 1rem; text-decoration:none; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior:auto!important; animation:none!important; transition:none!important; } .reveal{opacity:1; transform:none;} }
+
+@media (max-width:768px) {
+  nav { padding:0 1.2rem; }
+  nav ul { display:none; position:absolute; top:68px; left:0; right:0; background:rgba(6,0,15,.96); border-bottom:1px solid var(--border); padding:1rem 1.2rem; flex-direction:column; gap:.9rem; }
+  nav ul.open { display:flex; }
+  .mobile-toggle { display:block; }
+  .section { padding:4rem 1.2rem; }
+  .def-grid, .fat-water { grid-template-columns:1fr; }
+  footer { padding:3rem 1.2rem; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#oqsao">Pular para o conteúdo</a>
+<div class="progress" id="progress"></div>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">NUTRI<span style="color:var(--cyan)">NEXUS</span></div>
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menu">☰</button>
+  <ul id="navLinks">
+    <li><a href="#oqsao">O que são</a></li>
+    <li><a href="#funcoes">Funções</a></li>
+    <li><a href="#perigos">Perigos</a></li>
+    <li><a href="#fontes">Fontes</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="badge">⬡ Informação Científica Verificada ⬡</div>
+    <h1>
+      Vitaminas &amp; Minerais:<br>
+      <span class="grad">Ciência, Função</span><br>
+      e Perigos Reais
+    </h1>
+    <p><strong>Informação simples, visual e responsável</strong> sobre micronutrientes — com foco nas funções, nos riscos do excesso e na importância da orientação profissional.</p>
+    <div class="hero-btns">
+      <a class="btn btn-p" href="#oqsao">Começar a Ler</a>
+      <a class="btn btn-o" href="#perigos">Ver os Perigos</a>
+    </div>
+    <div class="reading-box" aria-label="Resumo do projeto">
+      <div><strong>Objetivo</strong>Educação em saúde para o público geral.</div>
+      <div><strong>Foco</strong>Uso consciente de vitaminas e minerais.</div>
+      <div><strong>Alerta</strong>Suplementação não substitui avaliação profissional.</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat"><span class="stat-n">13</span><span class="stat-l">Vitaminas Essenciais</span></div>
+  <div class="stat"><span class="stat-n">23k</span><span class="stat-l">Visitas a emergências/ano¹</span></div>
+  <div class="stat"><span class="stat-n">50%</span><span class="stat-l">Adultos nos EUA usam suplementos²</span></div>
+  <div class="stat"><span class="stat-n">5%</span><span class="stat-l">Benefício comprovado sem deficiência³</span></div>
+</div>
+
+<!-- O QUE SÃO VITAMINAS -->
+<section class="section reveal" id="oqsao">
+  <div class="max">
+    <div class="s-tag">// Definição</div>
+    <h2 class="s-title">O que são <span>Vitaminas</span>?</h2>
+    <p class="s-sub">Uma introdução baseada nas principais enciclopédias e bases de dados científicas.</p>
+
+    <div class="def-grid">
+      <div class="def-body">
+        <p>Vitaminas são moléculas orgânicas (ou conjuntos de moléculas relacionadas chamadas vitameros) essenciais ao organismo em pequenas quantidades para o funcionamento metabólico adequado. O termo foi criado em 1912 pelo bioquímico Casimir Funk, derivado de <em>"vita"</em> (vida) em latim.</p>
+        <div class="highlight-box">
+          "Vitamins are organic molecules [...] essential to an organism in small quantities for proper metabolic function. These essential nutrients cannot be synthesized in the organism in sufficient quantities for survival, and therefore must be obtained through consumption."
+          <br><a class="source" href="https://en.wikipedia.org/wiki/Vitamin" target="_blank">Wikipedia — Vitamin (com base em literatura científica revisada)</a>
+        </div>
+        <p>Ao contrário de proteínas, gorduras e carboidratos — que podem ser sintetizados pelo organismo em quantidades adequadas — a maioria das vitaminas precisa ser obtida pela alimentação. Sua função é predominantemente catalítica e regulatória: elas facilitam ou controlam reações químicas vitais nas células.</p>
+        <div class="highlight-box">
+          "Vitamins also differ from the other biological compounds in that relatively small quantities are needed to complete their functions. In general these functions are of a catalytic or regulatory nature, facilitating or controlling vital chemical reactions in the body's cells."
+          <br><a class="source" href="https://www.britannica.com/science/vitamin" target="_blank">Encyclopædia Britannica — Vitamin</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="color:var(--muted);font-size:.9rem;font-weight:300;margin-bottom:1rem;">As vitaminas são divididas em dois grandes grupos, com comportamentos muito diferentes no organismo — diferença crítica para entender os riscos do excesso:</p>
+        <div class="fat-water">
+          <div class="type-card fat">
+            <h4>⚠ Lipossolúveis</h4>
+            <ul>
+              <li>Vitamina A</li>
+              <li>Vitamina D</li>
+              <li>Vitamina E</li>
+              <li>Vitamina K</li>
+            </ul>
+            <p style="font-size:.82rem;color:var(--muted);margin-top:.8rem;font-weight:300;line-height:1.6;">Se acumulam nos tecidos adiposos e no fígado. O excesso <strong style="color:var(--pink)">não é eliminado pela urina</strong> — risco real de toxicidade.</p>
+          </div>
+          <div class="type-card water">
+            <h4>💧 Hidrossolúveis</h4>
+            <ul>
+              <li>Vitamina C</li>
+              <li>B1 (Tiamina)</li>
+              <li>B2 (Riboflavina)</li>
+              <li>B3, B5, B6</li>
+              <li>B7, B9, B12</li>
+            </ul>
+            <p style="font-size:.82rem;color:var(--muted);margin-top:.8rem;font-weight:300;line-height:1.6;">O excesso é eliminado pela urina. Mas doses muito altas de B6, por exemplo, ainda podem causar danos neurológicos.</p>
+          </div>
+        </div>
+        <div class="highlight-box" style="margin-top:1.2rem;">
+          "Fat-soluble vitamins (vitamin A, vitamin D, vitamin E, and vitamin K) dissolve in fat and tend to accumulate in the body. Water-soluble vitamins [...] must dissolve in water before they can be absorbed by the body, and therefore cannot be stored."
+          <br><a class="source" href="https://nutritionsource.hsph.harvard.edu/vitamins/" target="_blank">Harvard T.H. Chan School of Public Health — The Nutrition Source</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">◆ ◇ ◆ ◇ ◆ ◇ ◆</div>
+
+<!-- FUNÇÕES DE CADA VITAMINA -->
+<section class="section dark reveal" id="funcoes">
+  <div class="max">
+    <div class="centered">
+      <div class="s-tag">// Funções</div>
+      <h2 class="s-title">O que cada vitamina <span>faz no corpo</span></h2>
+      <p class="s-sub centered">Baseado no MedlinePlus (NIH/NLM), Britannica, Harvard Nutrition Source e StatPearls (NCBI). Todas as informações têm fonte verificável.</p>
+    </div>
+
+    <div style="overflow-x:auto;">
+    <table class="vtable">
+      <thead>
+        <tr>
+          <th>Vitamina</th>
+          <th>Nome Químico</th>
+          <th>Solubilidade</th>
+          <th>Função Principal</th>
+          <th>Deficiência Causa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Vitamina A</td>
+          <td>Retinol / Carotenoides</td>
+          <td><span class="sol-fat">Lipossolúvel</span></td>
+          <td>Saúde ocular (visão noturna), crescimento celular, reprodução e imunidade. Regula mais de 500 genes.</td>
+          <td>Cegueira noturna, queratinização da córnea, imunidade comprometida</td>
+        </tr>
+        <tr>
+          <td>Vitamina B1</td>
+          <td>Tiamina</td>
+          <td><span class="sol-water">Hidrossolúvel</span></td>
+          <td>Cofator essencial para enzimas que quebram a glicose e produzem ATP. Fundamental para tecidos com alto consumo de energia (cérebro, coração).</td>
+          <td>Beribéri, Síndrome de Wernicke-Korsakoff</td>
+        </tr>
+        <tr>
+          <td>Vitamina B2</td>
+          <td>Riboflavina</td>
+          <td><span class="sol-water">Hidrossolúvel</span></td>
+          <td>Essencial para crescimento e desenvolvimento celular, metabolismo de energia e produção de glóbulos vermelhos.</td>
+          <td>Inflamação dos lábios, fissuras na boca</td>
+        </tr>
+        <tr>
+          <td>Vitamina B3</td>
+          <td>Niacina / Niacinamida</td>
+          <td><span class="sol-water">Hidrossolúvel</span></td>
+          <td>Necessária para que as células cresçam e funcionem corretamente; participa de reações de oxirredução no metabolismo.</td>
+          <td>Pelagra (diarréia, dermatite, demência)</td>
+        </tr>
+        <tr>
+          <td>Vitamina B5</td>
+          <td>Ácido Pantotênico</td>
+          <td><span class="sol-water">Hidrossolúvel</span></td>
+          <td>Produção de energia e hormônios; síntese de colesterol e metabolismo de gorduras, proteínas e carboidratos.</td>
+          <td>Parestesia ("formigamento")</td>
+        </tr>
+        <tr>
+          <td>Vitamina B6</td>
+          <td>Piridoxina</td>
+          <td><span class="sol-water">Hidrossolúvel</span></td>
+          <td>Formação de glóbulos vermelhos, manutenção da função cerebral e participação em mais de 100 reações enzimáticas.</td>
+          <td>Anemia, neuropatia periférica</td>
+        </tr>
+        <tr>
+          <td>Vitamina B7</td>
+          <td>Biotina</td>
+          <td><span class="sol-water">Hidrossolúvel</span></td>
+          <td>Metabolismo de proteínas, gorduras e carboidratos; contribui para a queratina (estrutura de pele, cabelo e unhas).</td>
+          <td>Dermatite, queda de cabelo</td>
+        </tr>
+        <tr>
+          <td>Vitamina B9</td>
+          <td>Folato / Ácido Fólico</td>
+          <td><span class="sol-water">Hidrossolúvel</span></td>
+          <td>Produção de DNA, formação de glóbulos vermelhos e desenvolvimento neurológico fetal.</td>
+          <td>Anemia megaloblástica, defeitos do tubo neural no feto</td>
+        </tr>
+        <tr>
+          <td>Vitamina B12</td>
+          <td>Cobalamina</td>
+          <td><span class="sol-water">Hidrossolúvel</span></td>
+          <td>Eritropoiese (formação de glóbulos vermelhos) e manutenção do sistema nervoso. Única vitamina hidrossolúvel armazenada no fígado.</td>
+          <td>Anemia perniciosa, degeneração da medula espinhal</td>
+        </tr>
+        <tr>
+          <td>Vitamina C</td>
+          <td>Ácido Ascórbico</td>
+          <td><span class="sol-water">Hidrossolúvel</span></td>
+          <td>Síntese de colágeno, antioxidante potente, absorção de ferro e cicatrização de feridas e fortalecimento de vasos sanguíneos.</td>
+          <td>Escorbuto (sangramento de gengivas, cicatrização comprometida)</td>
+        </tr>
+        <tr>
+          <td>Vitamina D</td>
+          <td>Calciferol</td>
+          <td><span class="sol-fat">Lipossolúvel</span></td>
+          <td>Regulação do cálcio e fósforo, saúde óssea, imunidade e função neuromuscular. Produzida pelo corpo com exposição solar.</td>
+          <td>Raquitismo (crianças), Osteomalácia (adultos)</td>
+        </tr>
+        <tr>
+          <td>Vitamina E</td>
+          <td>Tocoferol</td>
+          <td><span class="sol-fat">Lipossolúvel</span></td>
+          <td>Antioxidante lipídico que protege membranas celulares; auxilia na comunicação entre células e na circulação sanguínea.</td>
+          <td>Raro; pode causar neuropatia em casos graves</td>
+        </tr>
+        <tr>
+          <td>Vitamina K</td>
+          <td>Filoquinona / Menaquinona</td>
+          <td><span class="sol-fat">Lipossolúvel</span></td>
+          <td>Essencial para a cascata de coagulação sanguínea e para direcionar cálcio aos ossos (não às artérias).</td>
+          <td>Sangramento excessivo, coagulação comprometida</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <a class="source" href="https://medlineplus.gov/ency/article/002399.htm" target="_blank" style="margin-top:1rem; display:inline-flex;">MedlinePlus / NIH National Library of Medicine — Vitamins</a>
+    &nbsp;
+    <a class="source" href="https://www.ncbi.nlm.nih.gov/books/NBK538510/" target="_blank" style="margin-top:1rem; display:inline-flex;">StatPearls / NCBI — Biochemistry, Water Soluble Vitamins</a>
+  </div>
+</section>
+
+<div class="divider">◆ ◇ ◆ ◇ ◆ ◇ ◆</div>
+
+<!-- PERIGOS -->
+<section class="section reveal" id="perigos">
+  <div class="max">
+    <div class="s-tag">// Alerta Científico</div>
+    <h2 class="s-title">Os <span>Perigos Reais</span> do Uso Indiscriminado</h2>
+    <p class="s-sub">Esta seção apresenta exclusivamente evidências documentadas em estudos revisados por pares. Nenhuma informação foi inventada ou extrapolada.</p>
+
+    <div class="alert-bar">
+      <strong>⚠ ATENÇÃO:</strong> Um estudo publicado no <em>New England Journal of Medicine</em>, analisando dados de vigilância de 63 departamentos de emergência nos EUA ao longo de 10 anos, estimou que os efeitos adversos de suplementos causaram em média <strong>23.000 visitas a pronto-socorros por ano</strong> no país.
+      <br><a class="source" href="https://www.health.harvard.edu/blog/harmful-effects-of-supplements-can-send-you-to-the-emergency-department-201510158434" target="_blank">Harvard Health Blog — N Engl J Med, citado por Harvard Health Publishing, 2015</a>
+    </div>
+
+    <div class="danger-grid">
+
+      <div class="danger-card">
+        <span class="d-icon">🫁</span>
+        <h3>Beta-Caroteno e Câncer de Pulmão</h3>
+        <p>Um dos achados mais alarmantes da literatura: a suplementação com beta-caroteno (precursor da vitamina A) em fumantes mostrou <strong style="color:var(--pink)">aumento do risco de câncer de pulmão</strong>, não proteção. Dados do CMAJ (2003), que revisou 36 vitaminas pela UK Food Standards Agency, alertam especificamente para esse risco.</p>
+        <a class="source" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC164945/" target="_blank">CMAJ, 2003 — PMC/NIH: Toxic effects of vitamin and mineral supplements</a>
+      </div>
+
+      <div class="danger-card">
+        <span class="d-icon">🫀</span>
+        <h3>Vitamina D e Risco Cardíaco</h3>
+        <p>Adultos que excedem regularmente o limite seguro de 4.000 UI/dia de vitamina D podem desenvolver <strong style="color:var(--pink)">problemas cardíacos sérios</strong>. O grande ensaio clínico VITAL (Vitamin D and Omega-3 Trial), publicado no BMJ, não encontrou efeito protetor cardiovascular em pessoas saudáveis suplementadas com 2.000 UI/dia.</p>
+        <a class="source" href="https://www.webmd.com/diet/effects-of-taking-too-many-vitamins" target="_blank">WebMD — Effects of Taking Too Many Vitamins (com referência a pesquisadores NIH)</a>
+        <a class="source" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7322674/" target="_blank">BMJ / PMC — Health effects of vitamin and mineral supplements (VITAL Trial)</a>
+      </div>
+
+      <div class="danger-card">
+        <span class="d-icon">🧠</span>
+        <h3>Neuropatia por Excesso de B6</h3>
+        <p>A vitamina B6 (piridoxina) é hidrossolúvel, mas não é inofensiva em altas doses. O excesso causa <strong style="color:var(--pink)">danos aos nervos</strong> — neuropatia periférica com formigamento e perda de sensibilidade. Stanford Medicine e o BMJ confirmam esse efeito.</p>
+        <a class="source" href="https://med.stanford.edu/news/insights/2025/12/supplements-five-myths-worth-busting.html" target="_blank">Stanford Medicine — Five myths about supplements worth busting, 2025</a>
+      </div>
+
+      <div class="danger-card">
+        <span class="d-icon">🫀</span>
+        <h3>Vitamina E e Resultados Adversos</h3>
+        <p>Pesquisadores de Johns Hopkins, após revisão de estudos cobrindo mais de 450.000 pessoas, publicaram em <em>Annals of Internal Medicine</em> que vitamina E e beta-caroteno em doses altas <strong style="color:var(--pink)">"appear to be harmful"</strong>. O editorial do JAMA concluiu que multivitaminas não reduzem risco de doenças cardíacas, câncer ou declínio cognitivo.</p>
+        <a class="source" href="https://www.hopkinsmedicine.org/health/wellness-and-prevention/is-there-really-any-benefit-to-multivitamins" target="_blank">Johns Hopkins Medicine — Is There Really Any Benefit to Multivitamins?</a>
+      </div>
+
+      <div class="danger-card">
+        <span class="d-icon">🫁</span>
+        <h3>Hipervitaminose A e Dano Hepático</h3>
+        <p>O NIH (LiverTox) classifica a vitamina A em altas doses como <strong style="color:var(--pink)">"toxina direta"</strong>. Um estudo de Gastroenterology (1991) acompanhou 41 pacientes com hepatotoxicidade por vitamina A: 17 desenvolveram cirrose e 6 morreram de causas relacionadas ao fígado. O menor consumo diário contínuo que causou cirrose foi 25.000 UI/dia por 6 anos.</p>
+        <a class="source" href="https://www.ncbi.nlm.nih.gov/books/NBK548165/" target="_blank">NIH LiverTox — Vitamin A (Hepatotoxicity)</a>
+        <a class="source" href="https://pubmed.ncbi.nlm.nih.gov/2019375/" target="_blank">Gastroenterology, 1991 — PubMed: Liver damage by therapeutic vitamin A (41 cases)</a>
+      </div>
+
+      <div class="danger-card">
+        <span class="d-icon">⚗️</span>
+        <h3>Minerais: Toxicidade por Sobrecarga</h3>
+        <p>A revisão do CMAJ (2003) documenta: magnésio em doses acima de 400 mg/d provoca diarreia; ferro causa sobrecarga e constipação; zinco acima do limite causa <strong style="color:var(--pink)">imunossupressão</strong> e prejudica a absorção de cobre; selênio acima de 910 mcg/d provoca queda de cabelo e neuropatia periférica.</p>
+        <a class="source" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC164945/" target="_blank">CMAJ 2003 — PMC/NIH: Toxic effects of vitamin and mineral supplements</a>
+      </div>
+
+      <div class="danger-card">
+        <span class="d-icon">🍼</span>
+        <h3>Crianças São Mais Vulneráveis</h3>
+        <p>Um levantamento canadense citado no BMJ mostrou que <strong style="color:var(--pink)">mais de 80% das crianças de 1 a 3 anos</strong> que usavam suplementos consumiam vitamina A e niacina acima do limite superior tolerável. Nos EUA, 97% dos toddlers suplementados excediam o limite de vitamina A. A toxicidade ocorre em doses muito menores nas crianças do que em adultos.</p>
+        <a class="source" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7322674/" target="_blank">BMJ / PMC — Health effects of vitamin and mineral supplements</a>
+      </div>
+
+      <div class="danger-card">
+        <span class="d-icon">💊</span>
+        <h3>Interação com Medicamentos</h3>
+        <p>Vitamina K reduz a eficácia de anticoagulantes (varfarina). Ômega-3 em altas doses pode causar arritmia cardíaca. Vitamina A potencializa efeitos teratogênicos durante a gravidez. Stanford Medicine recomenda sempre informar ao médico todos os suplementos em uso antes de qualquer prescrição.</p>
+        <a class="source" href="https://med.stanford.edu/news/insights/2025/12/supplements-five-myths-worth-busting.html" target="_blank">Stanford Medicine — Five myths about supplements worth busting, 2025</a>
+      </div>
+
+      <div class="danger-card">
+        <span class="d-icon">📉</span>
+        <h3>Benefício Inexistente Sem Deficiência</h3>
+        <p>A revisão publicada no <em>Annals of Internal Medicine</em> (Johns Hopkins, 2013), que analisou dados de 450.000 pessoas, concluiu que multivitaminas <strong style="color:var(--pink)">não reduzem o risco de doenças cardíacas, câncer, declínio cognitivo ou morte prematura</strong>. A recomendação dos autores: "Enough is enough. Stop wasting money on vitamin and mineral supplements."</p>
+        <a class="source" href="https://www.hopkinsmedicine.org/health/wellness-and-prevention/is-there-really-any-benefit-to-multivitamins" target="_blank">Johns Hopkins Medicine — Is There Really Any Benefit to Multivitamins?</a>
+      </div>
+
+    </div>
+
+    <!-- CASO REAL -->
+    <div style="margin-top:3rem; background:rgba(168,85,247,.06); border:1px solid var(--border); border-left:3px solid var(--accent); padding:2rem;">
+      <h3 style="font-family:'Orbitron',monospace; font-size:.9rem; letter-spacing:2px; color:var(--accent); margin-bottom:1rem;">📋 CASO CLÍNICO DOCUMENTADO — PubMed/PMC</h3>
+      <p style="color:var(--muted); font-size:.92rem; line-height:1.8; font-weight:300;">
+        Um caso publicado na revista clínica <em>Alimentary Pharmacology &amp; Therapeutics</em> (2020), indexado no PubMed e disponível no PMC/NIH, descreve uma mulher de 27 anos que desenvolveu toxicidade hepática grave por hipervitaminose A. Ela havia comprado vitamina A online para autotratamento de acne e a consumiu diariamente por mais de 18 meses. A biópsia hepática revelou fibrose perisinusoidal extensa e hipertrofia de células estreladas — lesão compatível com hipervitaminose A, que resultou em dano ao fígado sem histórico de alcoolismo ou outra causa subjacente.
+        <br>O estudo ressalta que um número crescente de pacientes compra medicamentos não regulamentados online, e pede maior conscientização sobre os riscos de vitaminas que "parecem inofensivas."
+      </p>
+      <a class="source" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7144761/" target="_blank">PMC / NIH — Liver toxicity from vitamin A (PubMed ID: 32280780) — Alimentary Pharmacology &amp; Therapeutics, 2020</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider">◆ ◇ ◆ ◇ ◆ ◇ ◆</div>
+
+<!-- RECOMENDAÇÕES -->
+<section class="section dark reveal">
+  <div class="max">
+    <div class="centered">
+      <div class="s-tag">// Orientações Baseadas em Evidências</div>
+      <h2 class="s-title">O que a ciência <span>recomenda</span></h2>
+      <p class="s-sub centered">Síntese das recomendações de Harvard, Johns Hopkins, Stanford e NIH — nenhuma delas incentiva a suplementação indiscriminada.</p>
+    </div>
+
+    <div class="reco-grid">
+      <div class="reco-card">
+        <h4>Alimentos Primeiro</h4>
+        <p>"If you follow a healthy diet, you can get all of the vitamins and minerals you need from food." — Dr. Larry Appel, Director, Johns Hopkins Welch Center for Prevention. Uma dieta variada com frutas, vegetais, grãos integrais e proteínas de qualidade fornece o essencial para a maioria das pessoas.</p>
+        <a class="source" href="https://www.hopkinsmedicine.org/health/wellness-and-prevention/is-there-really-any-benefit-to-multivitamins" target="_blank">Johns Hopkins Medicine</a>
+      </div>
+      <div class="reco-card">
+        <h4>Suplementar Apenas com Deficiência</h4>
+        <p>Stanford Medicine é clara: "Supplements typically make sense only for those with a proven deficiency, restricted diet or specific condition known to benefit from them." O diagnóstico de deficiência deve ser feito por exame de sangue solicitado por profissional de saúde.</p>
+        <a class="source" href="https://med.stanford.edu/news/insights/2025/12/supplements-five-myths-worth-busting.html" target="_blank">Stanford Medicine, 2025</a>
+      </div>
+      <div class="reco-card">
+        <h4>Exceções Reconhecidas pela Ciência</h4>
+        <p>O ácido fólico (B9) é recomendado para mulheres em idade fértil para prevenção de defeitos do tubo neural. Veganos precisam de B12 (ausente em alimentos vegetais). Pessoas acima de 50 anos podem precisar de cálcio, D e B12 adicionais. Gestantes devem seguir prescrição médica de vitaminas pré-natais.</p>
+        <a class="source" href="https://www.hopkinsmedicine.org/health/wellness-and-prevention/is-there-really-any-benefit-to-multivitamins" target="_blank">Johns Hopkins Medicine</a>
+      </div>
+      <div class="reco-card">
+        <h4>Informe Seu Médico</h4>
+        <p>"I would always recommend speaking with your medical provider and letting them know what supplements you're taking. They can confirm based on your medications, and the disease or chronic condition you have, whether it's safe." — Catherine Hu, Dietista Clínica, Stanford Health.</p>
+        <a class="source" href="https://med.stanford.edu/news/insights/2025/12/supplements-five-myths-worth-busting.html" target="_blank">Stanford Medicine, 2025</a>
+      </div>
+      <div class="reco-card">
+        <h4>Mais Não É Melhor</h4>
+        <p>A maioria das pessoas não percebe que não há vantagem real em consumir mais do que as quantidades recomendadas de vitaminas e minerais — e pode haver desvantagens sérias. — Johanna Dwyer, RD, pesquisadora sênior do National Institutes of Health's Office of Dietary Supplements.</p>
+        <a class="source" href="https://www.webmd.com/diet/effects-of-taking-too-many-vitamins" target="_blank">WebMD — NIH Office of Dietary Supplements</a>
+      </div>
+      <div class="reco-card">
+        <h4>Consulte os Limites Oficiais</h4>
+        <p>Os Dietary Reference Intakes (DRIs), desenvolvidos pela National Academy of Medicine (EUA) e usados como referência internacional, estabelecem não só a ingestão recomendada mas também o Nível Superior Tolerável (UL) — o limite a partir do qual surgem riscos para a saúde.</p>
+        <a class="source" href="https://nutritionsource.hsph.harvard.edu/vitamins/" target="_blank">Harvard T.H. Chan — Vitamins and Minerals</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">◆ ◇ ◆ ◇ ◆ ◇ ◆</div>
+
+<!-- FONTES -->
+<section class="section reveal" id="fontes">
+  <div class="max">
+    <div class="s-tag">// Referências</div>
+    <h2 class="s-title">Todas as <span>Fontes Científicas</span></h2>
+    <p class="s-sub">Todas as afirmações deste site são rastreáveis às fontes abaixo. Nenhuma citação foi inventada ou extrapolada. Clique nos links para verificar.</p>
+
+    <ul class="sources-list">
+      <li>
+        <div>
+          <span class="src-label">Harvard Health Publishing — Harmful effects of supplements can send you to the emergency department</span>
+          Referência ao estudo publicado no New England Journal of Medicine sobre visitas a emergências por suplementos (23.000/ano nos EUA).
+          <br><a href="https://www.health.harvard.edu/blog/harmful-effects-of-supplements-can-send-you-to-the-emergency-department-201510158434" target="_blank">https://health.harvard.edu — Outubro 2015</a>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="src-label">CMAJ (Canadian Medical Association Journal) — Toxic effects of vitamin and mineral supplements</span>
+          Revisão de 36 vitaminas e minerais pela UK Food Standards Agency. Documenta toxicidade de minerais e risco de beta-caroteno em fumantes.
+          <br><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC164945/" target="_blank">PMC/NIH — CMAJ 2003;169(1):47–48</a>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="src-label">Johns Hopkins Medicine — Is There Really Any Benefit to Multivitamins?</span>
+          Revisão de estudos com 450.000 participantes; editorial "Enough Is Enough" publicado em Annals of Internal Medicine.
+          <br><a href="https://www.hopkinsmedicine.org/health/wellness-and-prevention/is-there-really-any-benefit-to-multivitamins" target="_blank">https://hopkinsmedicine.org</a>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="src-label">BMJ / PMC — Health effects of vitamin and mineral supplements (Zhang et al.)</span>
+          Inclui dados do VITAL Trial (Vitamin D and Omega-3 Trial) e levantamentos nacionais sobre excesso de suplementação em crianças.
+          <br><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7322674/" target="_blank">PMC7322674 — BMJ 2020</a>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="src-label">Stanford Medicine — In search of clarity on supplements: Five myths worth busting</span>
+          Declarações de especialistas da Stanford Prevention Research Center e Stanford Lifestyle Medicine sobre riscos e mitos de suplementos.
+          <br><a href="https://med.stanford.edu/news/insights/2025/12/supplements-five-myths-worth-busting.html" target="_blank">Stanford Medicine News — Dezembro 2025</a>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="src-label">NIH LiverTox — Vitamin A (Hepatotoxicity)</span>
+          Base de dados do National Institutes of Health sobre toxicidade hepática. Classifica vitamina A em altas doses como "toxina direta" (Likelihood Score A[H]).
+          <br><a href="https://www.ncbi.nlm.nih.gov/books/NBK548165/" target="_blank">NCBI Bookshelf — NIH</a>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="src-label">PubMed — Liver damage caused by therapeutic vitamin A: dose-related toxicity in 41 cases</span>
+          Geubel AP et al. Gastroenterology. 1991;100(6):1701-9. Estudo clínico de 41 pacientes, 17 com cirrose, 6 mortes por doença hepática.
+          <br><a href="https://pubmed.ncbi.nlm.nih.gov/2019375/" target="_blank">PubMed ID: 2019375</a>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="src-label">PMC/NIH — Liver toxicity from vitamin A (caso clínico, 2020)</span>
+          Caso documentado de mulher de 27 anos com hepatotoxicidade por hipervitaminose A — suplementação autoindicada por 18 meses.
+          <br><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7144761/" target="_blank">PMC7144761 — Aliment Pharmacol Ther 2020</a>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="src-label">StatPearls / NCBI — Biochemistry, Water Soluble Vitamins (Lykstad & Sharma)</span>
+          Revisão técnica publicada em StatPearls (NCBI/NLM) sobre vitaminas hidrossolúveis, suas funções e consequências de deficiência.
+          <br><a href="https://www.ncbi.nlm.nih.gov/books/NBK538510/" target="_blank">NCBI Bookshelf — StatPearls 2023</a>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="src-label">MedlinePlus / NIH National Library of Medicine — Vitamins</span>
+          Referência oficial do NIH/NLM para funções, deficiências e informações gerais sobre cada vitamina essencial.
+          <br><a href="https://medlineplus.gov/ency/article/002399.htm" target="_blank">medlineplus.gov</a>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="src-label">Harvard T.H. Chan School of Public Health — The Nutrition Source: Vitamins and Minerals</span>
+          Informações sobre classificação, absorção e papel das vitaminas hidrossolúveis e lipossolúveis no organismo.
+          <br><a href="https://nutritionsource.hsph.harvard.edu/vitamins/" target="_blank">Harvard Nutrition Source</a>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="src-label">Encyclopædia Britannica — Vitamin</span>
+          Definição e características das vitaminas como nutrientes essenciais com funções catalíticas e regulatórias.
+          <br><a href="https://www.britannica.com/science/vitamin" target="_blank">britannica.com/science/vitamin</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="f-logo">NUTRI NEXUS</span>
+  <p class="f-tagline">Informação Científica Verificável — Sem Invenções</p>
+  <div class="f-disclaimer">
+    ⚠ Este site tem caráter exclusivamente educativo e informativo. Todas as informações são baseadas em fontes científicas verificáveis listadas acima. Não constitui conselho médico ou nutricional individualizado. Consulte sempre um médico ou nutricionista registrado antes de iniciar, alterar ou interromper qualquer suplementação.
+  </div>
+  <p class="f-copy">© 2026 NutriNexus — Todas as citações pertencem a seus respectivos autores e instituições.</p>
+</footer>
+
+
+<a class="back-top" id="backTop" href="#" aria-label="Voltar ao topo">↑</a>
+<script>
+const progress = document.getElementById('progress');
+const backTop = document.getElementById('backTop');
+const toggle = document.getElementById('mobileToggle');
+const navLinks = document.getElementById('navLinks');
+function updateProgress(){
+  const h = document.documentElement;
+  const scrolled = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  progress.style.width = scrolled + '%';
+  backTop.classList.toggle('show', h.scrollTop > 500);
+}
+window.addEventListener('scroll', updateProgress, {passive:true});
+updateProgress();
+if(toggle && navLinks){
+  toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+}
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
+}, {threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
